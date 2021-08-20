@@ -25,5 +25,5 @@ two (URLs are provided in this example):
 ```bash
  ruby -r "./two.rb" -e "FancyWordMachine.new.thread_machine 'https://dev-assessment.anvil.app/_/api/docs/1?slow=true,  https://dev-assessment.anvil.app/_/api/docs/2?slow=true, https://dev-assessment.anvil.app/_/api/docs/3?slow=true'"
 ```
-The command line inputs are given at the start of each file.
+The command line inputs are also given at the start of each file.
 
