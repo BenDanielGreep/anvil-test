@@ -71,7 +71,7 @@ class FancyWordMachine
   def sort_words(frequencies)
     sorted = frequencies.sort { |(k1, v1), (k2, v2)| v1 == v2 ? k1 <=> k2 : v2 <=> v1 }.to_h
     sorted.each do |key, value|
-      puts "#{key}:#{value}"
+      puts "#{key}: #{value}"
     end
   end
 end
