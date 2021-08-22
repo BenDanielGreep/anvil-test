@@ -7,6 +7,7 @@ require 'rufus-scheduler'
 
 class FancyWordMachine
   def initialize
+    @frequencies = Hash.new(0)
     @total_words_so_far = []
     @total_words_after_processing = []
     @scheduler = Rufus::Scheduler.new
@@ -61,15 +62,17 @@ class FancyWordMachine
     end
   end
 
+  #count_words_except_last_word
   def count_words(paragraph)
     words = paragraph.join('').split(' ')
-    frequencies = Hash.new(0)
-    words.each { |word| frequencies[word.downcase.gsub(/\W+/, '').gsub("\n", ' ')] += 1 }
-    sort_words(frequencies)
+    words.each { |word| @frequencies[word.downcase.gsub(/\W+/, '').gsub("\n", ' ')] += 1 }
+    sort_words
   end
 
-  def sort_words(frequencies)
-    sorted = frequencies.sort { |(k1, v1), (k2, v2)| v1 == v2 ? k1 <=> k2 : v2 <=> v1 }.to_h
+  #count_all_the_words()
+
+  def sort_words
+    sorted = @frequencies.sort { |(k1, v1), (k2, v2)| v1 == v2 ? k1 <=> k2 : v2 <=> v1 }.to_h
     sorted.each do |key, value|
       puts "#{key}: #{value}"
     end
