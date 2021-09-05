@@ -7,6 +7,7 @@ require 'json'
 class WordMachine
   def initialize
     @all_words = []
+    @frequencies = Hash.new(0)
     p 'Word Machine initialized'
   end
 
@@ -23,15 +24,14 @@ class WordMachine
 
   def count_words(paragraph)
     words = paragraph.join.split(' ')
-    frequencies = Hash.new(0)
-    words.each { |word| frequencies[word.downcase.gsub(/\W+/, '')] += 1 }
-    sort_words(frequencies)
+    words.each { |word| @frequencies[word.downcase.gsub(/\W+/, '')] += 1 }
+    sort_words
   end
 
-  def sort_words(frequencies)
-    sorted = frequencies.sort { |(k1, v1), (k2, v2)| v1 == v2 ? k1 <=> k2 : v2 <=> v1 }.to_h
+  def sort_words
+    sorted = @frequencies.sort { |(k1, v1), (k2, v2)| v1 == v2 ? k1 <=> k2 : v2 <=> v1 }.to_h
     sorted.each do |key, value|
-      puts "#{key}:#{value}"
+      puts "#{key}: #{value}"
     end
   end
 end
